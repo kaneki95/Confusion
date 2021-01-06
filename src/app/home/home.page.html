@@ -7,12 +7,16 @@
       DuckNote
     </ion-title><!-- On change l'intitulé de la page-->
     <ion-buttons slot="end">
-      <ion-button>
+      
+      <ion-button [routerLink]="['/profile']">
         <ion-icon slot="icon-only" name="contact"></ion-icon>
       </ion-button>
-      <ion-button>
-        <ion-icon slot="icon-only" name="search"></ion-icon>
+
+      <!--  Un bouton d'ajout permettant la création d'une note -->
+      <ion-button (click)="addNote()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
+
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -30,7 +34,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card *ngFor="let note of notes" [routerLink]="'/note/' + note.id" routerDirection="forward">
+  <ion-card *ngFor="let note of notesService.notes" [routerLink]="'/note/' + note.id" routerDirection="forward">
     <ion-card-header>
       <ion-card-title>{{note.title}}</ion-card-title>
     </ion-card-header>

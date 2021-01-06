@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController, NavController } from '@ionic/angular';
+import { NotesService } from '../services/notes.service';
 
 @Component({
   selector: 'app-home',
@@ -7,19 +9,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-    notes: { id: number, title: string, content: string }[] = [
-      { "id": 1, "title": "Faire les courses", "content": "Acheter de quoi faire une bonne raclette. Diversifier les types de fromages." },
-      { "id": 2, "title": "Faire du sport", "content": "Pensez à bien m'étirer avant de commencer, pour éviter toute courbature ou fracture." },
-      { "id": 3, "title": "IUT", "content": "Préparer la soutenance de stage et contacter mon tuteur." }
-    ];
+  notes: { id: number, title: string, content: string }[] = [];
 
-  constructor() { }
+  constructor(public notesService: NotesService,
+    private alertCtrl: AlertController,
+    private navCtrl: NavController,
+    ) { }
 
   ngOnInit() {
+    this.notesService.load();
+  }
+
+  async addNote() {
+    this.alertCtrl.create({
+      header: 'Nouvelle note',
+      inputs: [
+        {
+          type: 'text',
+          name: 'title',
+          placeholder: 'Intitulé de la note...'
+        },
+        {
+          type: 'text',
+          name: 'content',
+          id: 'note-content',
+          placeholder: 'Saisissez votre texte ici...'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Annuler'
+        },
+        {
+          text: 'Ajouter',
+          handler: (data) => {
+            this.notesService.createNote(data.title, data.content);
+          }
+        }
+      ]
+    }).then((alert) => {
+      alert.present();
+    });
   }
 
   getNoteById(id) {
     return this.notes.filter(note => note.id = id);
   }
+
   
 }

@@ -3,7 +3,18 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home" text="Retour"></ion-back-button>
     </ion-buttons>
+    
     <ion-title>{{note.title}}</ion-title>
+
+    <ion-buttons slot="end">
+
+      <!--  Un bouton d'ajout permettant la suppression d'une note -->
+      <ion-button (click)="deleteNote()">
+        <ion-icon slot="icon-only" name="remove"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
