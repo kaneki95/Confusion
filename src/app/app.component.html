@@ -12,6 +12,13 @@
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
+
+          <ion-menu-toggle auto-hide="false">
+            <ion-button expand="block" color="warning" (click)="logout()">
+              Se déconnecter
+            </ion-button>
+          </ion-menu-toggle>
+
         </ion-list>
 
         <ion-list id="labels-list">

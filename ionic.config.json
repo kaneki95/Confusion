@@ -1,5 +1,7 @@
 {
   "name": "Confusion",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
